@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main {
+     public static void main (String[] args) {
+         Scanner sc = new Scanner(System.in);
+    /* write your code here */
+    String a = sc.next();
+    int b = sc.nextInt();
+    String c = sc.next();
+         if (a.equals("M")) {
+        if(b>=10){
+            if(c.equals("P")) {
+                System.out.println("15000");
+            } else {
+                System.out.println("10000");
+            }
+        } else {
+            if(c.equals("P")) {
+                System.out.println("10000");
+            } else {
+                System.out.println("7000");
+            }}
+        }
+        if (a.equals("F")) {
+            if(b>=10){
+                if(c.equals("P")) {
+                    System.out.println("12000");
+                } else {
+                    System.out.println("9000");
+                }
+            } else {
+                if(c.equals("P")) {
+                    System.out.println("10000");
+                } else {
+                    System.out.println("6000");
+                }
+            }
+        }
+    }
+}   
