@@ -1,0 +1,32 @@
+package Problems;
+
+import java.util.Scanner;
+
+public class Maximum_in_Array {
+    // Finding Maximum in array
+    static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the size of array: ");
+        int[] array = new int[sc.nextInt()];
+        System.out.print("Enter the elements of array: ");
+        for (int i = 0; i < array.length; i++) {
+            array[i] = sc.nextInt();
+        }
+        int maximum = array[0];
+//        for (int g = 0; g <= array.length; g++) {
+//            if (g < array.length) {
+//                if (array[g] > array[g + 1] &&  array[g] > array[g - 1]) {
+//                    System.out.println(array[g]);
+//                }
+//            }
+//        }
+        int IndexOfMax = 0;
+        for (int g = 0; g < array.length; g++) {
+            if  (array[g] > maximum) {
+                maximum = array[g];
+                IndexOfMax = g;
+            }
+        }
+        System.out.println( "The maximum value is " + maximum + " at index number " + IndexOfMax);
+    }
+}
