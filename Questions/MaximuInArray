@@ -13,6 +13,7 @@ public class Maximum_in_Array {
             array[i] = sc.nextInt();
         }
         int maximum = array[0];
+        int maximum2 = array[0];
 //        for (int g = 0; g <= array.length; g++) {
 //            if (g < array.length) {
 //                if (array[g] > array[g + 1] &&  array[g] > array[g - 1]) {
@@ -20,13 +21,32 @@ public class Maximum_in_Array {
 //                }
 //            }
 //        }
+
+
         int IndexOfMax = 0;
-        for (int g = 0; g < array.length; g++) {
+        int IndexOfMax2 = 0;
+        /*for (int g = 0; g < array.length; g++) {
             if  (array[g] > maximum) {
                 maximum = array[g];
                 IndexOfMax = g;
             }
         }
-        System.out.println( "The maximum value is " + maximum + " at index number " + IndexOfMax);
+        System.out.println( "The maximum value is " + maximum + " at index number " + IndexOfMax);*/
+
+        // Finding Max and Second Max
+        for (int o = 0; o < array.length; o++) {
+            if (array[o] > maximum) {
+                maximum = array[o];
+                IndexOfMax = o;
+            }
+        }
+        System.out.println("The maximum number is " + maximum + " at index " + IndexOfMax);
+        for (int p = 0; p < array.length; p++) {
+            if(array[p] > maximum2 && maximum2 < maximum) {
+                maximum2 = array[p];
+                IndexOfMax2 = p;
+            }
+        }
+        System.out.println("The second maximum number is " + maximum2 + " at index " + IndexOfMax2);
     }
 }
