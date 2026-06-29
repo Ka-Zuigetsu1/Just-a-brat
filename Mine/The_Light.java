@@ -1,4 +1,6 @@
 package Mine;
+import javax.swing.*;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -25,14 +27,19 @@ public class The_Light {
         Story();
         combat1();
         String A = sc.nextLine();
+        if (A.equalsIgnoreCase("A")) {
+            name();
+        }
         Random ra = new Random();
         if (A.equals("A")) {
             System.out.println("Encountered " + Enemies1[0]);
             do {
                 System.out.println("Turn 1 = Zombies");
-                for (int i = 1; i <= 5; i++) {
-                    HP = HP - 5;
-                    System.out.println(HP + "HP left after attack by a zombie.");
+                for (int i = 0; i < ZOMBIES.length; i++) {
+                    if (ZOMBIES[i] > 0) {
+                        HP -= 5;
+                        System.out.println(HP + " HP left after attack by Zombie " + i);
+                    }
                 }
                 System.out.println("Turn 2 = Lucius");
                 System.out.println(">>>>INVENTORY>>>>" + Inventory[0] + " " + Inventory[1] + " " + Inventory[2] + " " + Inventory[3] + " " + Inventory[4]);
@@ -48,9 +55,16 @@ public class The_Light {
 //                        System.out.println("You have " + Inventory[2] + " Left");
                         double chance = Math.random();
                         if (chance < 0.50d) {
-                           ZOMBIES[ZOMBIES.length - 1]-= 40;
+                            for (int i = 0; i < ZOMBIES.length; i++) {
+                                ZOMBIES[i] -= 40;
+                            }
                             System.out.println("Landed crits! on all Zombies");
-                    } System.out.println("Zombies have " + ZOMBIES[0] + " HP Left");
+                            if (ZOMBIES[0] < 0 && ZOMBIES[1] < 0 && ZOMBIES[2] < 0 && ZOMBIES[3] < 0 && ZOMBIES[4] < 0 ) {
+                                break;
+                            }
+                    } for (int i = 0; i < ZOMBIES.length; i++) {
+                            System.out.println("Zombie " + i + " HP = " + ZOMBIES[i]);
+                        }
                 } else if (choice.equalsIgnoreCase(Inventory[3])) {
                     if (HP == 100) {
                         System.out.println("Healed From 100 HP to 100 HP");
@@ -63,15 +77,16 @@ public class The_Light {
                         System.out.println("Chose Combat Knife \n" +
                                 "You Can Only Attack one Zombie");
                         System.out.print("Enter The Zombie Number You want to attack: ");
-                        ZOMBIES[sc2.nextInt()] -= 50;
-                        if (ZOMBIES[sc2.nextInt()] > 5) {
+                        int temp = sc2.nextInt();
+                                ZOMBIES[temp] -= 50;
+                        if (ZOMBIES[temp] > 5) {
                             System.out.println("Invalid Zombie");
                         } else {
                             continue;
                         }
                     } else if (choice.equalsIgnoreCase(Inventory[2])) {
                         System.out.println("Throwing Bullets? Seriously?");
-                        for (int kk = 0; kk < 6; kk++) {
+                        for (int kk = 0; kk < ZOMBIES.length; kk++) {
                             ZOMBIES[kk] -= 5;
                         } System.out.println("Did 5 damage to all zombies");
                     } else if (choice.equalsIgnoreCase(Inventory[4])) {
@@ -87,17 +102,31 @@ public class The_Light {
                     else {
                     System.out.println("Not in Inventory");
                 }
-            } while (HP > 0 && (Zombie > 0 || Zombie2 > 0 || Zombie3 > 0 || Zombie4 > 0 || Zombie5 > 0));
+            } while (HP > 0 && (ZOMBIES[1] > 0 || ZOMBIES[2] > 0 || ZOMBIES[3] > 0 || ZOMBIES[4] > 0));
             System.out.println("\nAll Zombies Eliminated!");
             System.out.println("You continue deeper into the village...\n");
 
             int enemy = ra.nextInt(Enemies1.length);
 
-            System.out.println("Enemy Encountered : " + Enemies1[enemy]);
+            System.out.println("Enemy Encountered : " + Bosses[enemy]);
             if (enemy == 0) {
                 System.out.println("The ground begins to shake...");
                 System.out.println("A giant figure walks through the smoke...");
                 System.out.println("BOSS : TYRANT");
+                // ---------------------------------------------------------------------------------------------------------------------------------------
+                JFrame frame = new JFrame("WAGURI THE GREAT");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                URL imageURL = FIRST_ARRAY_CODE__ARJAV__.class.getResource("/Resources/index.jpg");
+                if (imageURL != null) {
+                    ImageIcon icon = new ImageIcon(imageURL);
+                    JLabel label = new JLabel(icon);
+                    frame.add(label);
+                    frame.pack();
+                } else {
+                    System.out.println("Error: Could not locate the image file inside Resources.");
+                }
+                frame.setVisible(true);
+                // -------------------------------------------------------------------------------------------------------------------------------------------
                 System.out.println("HP : " + Tyrant);
 
                 do {
@@ -122,7 +151,14 @@ public class The_Light {
                             System.out.println("You fired the 9mm!");
 
                             Tyrant -= 40;
-
+                            double chance =  Math.random();
+                            if (chance > 0.50d) {
+                                Tyrant -= 40;
+                            } double chance2 = Math.random();
+                            if (chance2 < 0.50d) {
+                                Tyrant -= 20;
+                                System.out.println("Patt Se Headshot");
+                            }
                             System.out.println("Tyrant HP : " + Tyrant);
 
                             HP -= 30;
@@ -137,7 +173,7 @@ public class The_Light {
 
                             Tyrant -= 15;
 
-                            HP -= 20;
+                            HP -= 50;
 
                             System.out.println("Your HP : " + HP);
 
@@ -209,6 +245,31 @@ public class The_Light {
                 }
                 while (Tyrant > 0 && HP > 0);
             } else if (enemy == 1) {
+                System.out.println("Lucius heard footsteps... They were fast...They were....here right behind him\n" +
+                        "There Was The Greatest Weapon Of Umbrella");
+                System.out.println("Lucius tried to run away as fast as he could but nemesis also ran..so fast that it his speed didnt defy his size\n" +
+                        "He grabbed lucius's head and threw him to the side at the wall\n" +
+                        "His back felt excruciating pain being thrown against a wall\n" +
+                        "Lucius tried to get up but he couldn't His legs gave out at the most import time of his life but that sudden Adrenaline rush\n" +
+                        "That feeling of strange excitement suddenly hit and felt like all his strength that had been drained away by THE NEMESIS \n" +
+                        "WAS\n" +
+                        "COMING\n" +
+                        "BACK.");
+                System.out.println("Enemy encountered: Nemesis - Umbrella's Greatest Result");
+                // -------------------------------------------------------------------------------------------------------------------------
+                JFrame frame = new JFrame("WAGURI THE GREAT");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                URL imageURL = FIRST_ARRAY_CODE__ARJAV__.class.getResource("/Resources/images.jpg");
+                if (imageURL != null) {
+                    ImageIcon icon = new ImageIcon(imageURL);
+                    JLabel label = new JLabel(icon);
+                    frame.add(label);
+                    frame.pack();
+                } else {
+                    System.out.println("Error: Could not locate the image file inside Resources.");
+                }
+                frame.setVisible(true);
+                // --------------------------------------------------------------------------------------------------------------------------
                 boolean found = false;
                 System.out.println("===== INVENTORY =====");
 
@@ -216,12 +277,6 @@ public class The_Light {
                     System.out.println(Inventory[i]);
                 }
                 String choice = sc.nextLine();
-                for (int i = 0; i < Inventory.length; i++) {
-                    if (choice.equalsIgnoreCase(Inventory[i])) {
-                        found = true;
-                        break;
-                    }
-                }
                 for (int i = 0; i < Inventory.length; i++) {
                     if (choice.equalsIgnoreCase(Inventory[i])) {
                         found = true;
@@ -265,6 +320,16 @@ public class The_Light {
                     }
                 } else {
                     System.out.println("Not in Inventory");
+                }
+                // DIANA!!!!!!!
+            } else {
+                System.out.println("Inventory");
+                for (int i = 0; i < Inventory.length; i++) {
+                    System.out.println(Inventory[i]);
+                }
+                String choice = sc.nextLine();
+                if (choice.equalsIgnoreCase(Inventory[0])) {
+
                 }
             }
         } else {
@@ -362,6 +427,16 @@ public class The_Light {
             System.out.println("Landed a crit!");
         }
     }
-
+    static void name() {
+        System.out.println("                                   __/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\________/\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\____________/\\\\\\______________/\\\\\\\\\\\\\\\\\\\\\\_____/\\\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\________/\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\___________         \n" +
+                "                                    _\\///////\\\\\\/////__\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\///////////____________\\/\\\\\\_____________\\/////\\\\\\///____/\\\\\\//////////__\\/\\\\\\_______\\/\\\\\\_\\///////\\\\\\/////____________        \n" +
+                "                                     _______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\_______________________\\/\\\\\\_________________\\/\\\\\\______/\\\\\\_____________\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_________________       \n" +
+                "                                      _______\\/\\\\\\_______\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_\\/\\\\\\\\\\\\\\\\\\\\\\_______________\\/\\\\\\_________________\\/\\\\\\_____\\/\\\\\\____/\\\\\\\\\\\\\\_\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_______\\/\\\\\\_________________      \n" +
+                "                                       _______\\/\\\\\\_______\\/\\\\\\/////////\\\\\\_\\/\\\\\\///////________________\\/\\\\\\_________________\\/\\\\\\_____\\/\\\\\\___\\/////\\\\\\_\\/\\\\\\/////////\\\\\\_______\\/\\\\\\_________________     \n" +
+                "                                        _______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\_______________________\\/\\\\\\_________________\\/\\\\\\_____\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_________________    \n" +
+                "                                         _______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\_______________________\\/\\\\\\_________________\\/\\\\\\_____\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_________________   \n" +
+                "                                          _______\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\___________\\/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\_\\//\\\\\\\\\\\\\\\\\\\\\\\\/__\\/\\\\\\_______\\/\\\\\\_______\\/\\\\\\_________________  \n" +
+                "                                           _______\\///________\\///________\\///__\\///////////////____________\\///////////////__\\///////////___\\////////////____\\///________\\///________\\///__________________ ");
+    }
     // WRITING THE ENDING SOON AFTER COMPLETING THE STORY I WILL WRITE DIANA'S FIGHT AND COMPLETE THE GAME
 }
