@@ -96,7 +96,6 @@ public class The_Light {
                                 " Signed only with a crimson symbol: \n" +
                                 "\n" +
                                 "The Eclipse Circle.");
-
                     }
                 }
                     else {
@@ -105,9 +104,7 @@ public class The_Light {
             } while (HP > 0 && (ZOMBIES[1] > 0 || ZOMBIES[2] > 0 || ZOMBIES[3] > 0 || ZOMBIES[4] > 0));
             System.out.println("\nAll Zombies Eliminated!");
             System.out.println("You continue deeper into the village...\n");
-
-            int enemy = ra.nextInt(Enemies1.length);
-
+            int enemy = 0;
             System.out.println("Enemy Encountered : " + Bosses[enemy]);
             if (enemy == 0) {
                 System.out.println("The ground begins to shake...");
@@ -128,9 +125,7 @@ public class The_Light {
                 frame.setVisible(true);
                 // -------------------------------------------------------------------------------------------------------------------------------------------
                 System.out.println("HP : " + Tyrant);
-
                 do {
-
                     System.out.println("\n===== INVENTORY =====");
 
                     for (int i = 0; i < Inventory.length; i++) {
@@ -193,7 +188,7 @@ public class The_Light {
 
                                 HP = 100;
 
-                                Inventory[3] = "Empty Spray";
+                                //Inventory[3] = "Empty Spray";
 
                                 System.out.println("Recovered to Full HP.");
 
@@ -208,13 +203,12 @@ public class The_Light {
                     } else {
 
                         System.out.println("Not in Inventory");
-
                     }
                     if (Tyrant <= 250 && Tyrant > 0) {
 
                         System.out.println();
                         System.out.println("--------------------------------");
-                        System.out.println("Your bullets are doing nothing...");
+                        System.out.println("Your bullets are doing nothing...(it is...but game mechanic is made that way for testing ahemmmmmm)");
                         System.out.println();
                         System.out.println("*HELICOPTER NOISES*");
                         System.out.println();
@@ -223,14 +217,31 @@ public class The_Light {
                         System.out.println("\"Hey Hero!\"");
                         System.out.println("\"Catch!!\"");
                         System.out.println();
+                        // -----------------------------------------------------------------------------------------
+                        frame = new JFrame("WAGURI THE GREAT");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        imageURL = FIRST_ARRAY_CODE__ARJAV__.class.getResource("/Resources/download.jfif");
+                        if (imageURL != null) {
+                            ImageIcon icon = new ImageIcon(imageURL);
+                            JLabel label = new JLabel(icon);
+                            frame.add(label);
+                            frame.pack();
+                        } else {
+                            System.out.println("Error: Could not locate the image file inside Resources.");
+                        }
+                        frame.setVisible(true);
+                        // -----------------------------------------------------------------------------------------
                         Inventory = Arrays.copyOf(Inventory, Inventory.length + 1);
                         Inventory[5] = "Rocket Launcher";
                         System.out.println("Rocket Launcher Added To Inventory! Press 5 To trigger IT!!!!");
-                        if(choice.equalsIgnoreCase(Inventory[5])){
+                        String choice22 = sc.nextLine();
+                        if(choice22.equalsIgnoreCase(Inventory[5])){
                             System.out.println();
                             System.out.println("You fired the Rocket Launcher!");
                             System.out.println();
                             System.out.println(">>>>>>>> BOOOOOOOOM <<<<<<<<");
+                            System.out.println("AND SO THE TYRANT DIED!!!!!\n" +
+                                    "BAAKI ENDING BAADME LIKHUNGA ABSOLUTE CINEMA FS!");
                             Tyrant -= 400;
                             Inventory[5]="Empty Rocket Launcher";
                         } else {
@@ -270,57 +281,24 @@ public class The_Light {
                 }
                 frame.setVisible(true);
                 // --------------------------------------------------------------------------------------------------------------------------
-                boolean found = false;
-                System.out.println("===== INVENTORY =====");
+                do {
+                    boolean found = false;
+                    System.out.println("===== INVENTORY =====");
 
-                for (int i = 0; i < Inventory.length; i++) {
-                    System.out.println(Inventory[i]);
-                }
-                String choice = sc.nextLine();
-                for (int i = 0; i < Inventory.length; i++) {
-                    if (choice.equalsIgnoreCase(Inventory[i])) {
-                        found = true;
-                        break;
+                    for (int i = 0; i < Inventory.length; i++) {
+                        System.out.println(Inventory[i]);
                     }
-                }
-                if (found) {
-                    if (choice.equalsIgnoreCase(Inventory[0])) {
-                        System.out.println("You fired the 9mm!");
-                        Nemesis -= 35;
-                        System.out.println("Nemesis HP : " + Nemesis);
-                    }
-                    else if (choice.equalsIgnoreCase(Inventory[1])) {
-                        System.out.println("You slashed Nemesis!");
-                        Nemesis -= 15;
-                        System.out.println("Nemesis HP : " + Nemesis);
-                    }
-                    else if (choice.equalsIgnoreCase(Inventory[2])) {
-                        System.out.println("Reloaded!");
-                        Inventory[2] = "9mm Ammo x30";
-                    }
-
-                    else if (choice.equalsIgnoreCase(Inventory[3])) {
-                        if (HP == 100) {
-                            System.out.println("Already Full HP.");
-                        } else {
-                            Inventory[3] = "Empty Spray";
-                            System.out.println("Recovered to Full HP.");
-                            HP = 100;
+                    String choice = sc.nextLine();
+                    for (int i = 0; i < Inventory.length; i++) {
+                        if (choice.equalsIgnoreCase(Inventory[i])) {
+                            found = true;
+                            break;
                         }
                     }
-                    else if (choice.equalsIgnoreCase(Inventory[4])) {
-                        System.out.println("\"Umbrella's greatest weapon cannot be stopped...\"");
+                    if (found) {
+                        
                     }
-                    else if (choice.equalsIgnoreCase("Rocket Launcher")) {
-                        System.out.println("You fired the Rocket Launcher!");
-                        System.out.println(">>>>>>>>>> BOOOOOOOOOM <<<<<<<<<<");
-                        Nemesis -= 500;
-                        Inventory[5] = "Empty Rocket Launcher";
-                        System.out.println("Nemesis HP : " + Nemesis);
-                    }
-                } else {
-                    System.out.println("Not in Inventory");
-                }
+                } while (Nemesis > 0 && HP > 0);
                 // DIANA!!!!!!!
             } else {
                 System.out.println("Inventory");
