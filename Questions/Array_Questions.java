@@ -1,0 +1,23 @@
+package Problems;
+import java.util.Arrays;
+import java.util.Scanner;
+public class Array_Questions {
+    static void main(String[] args) {
+// 1. Reverse an array
+        /*Scanner sc = new Scanner(System.in);
+        int[] array = new int[6];
+        int j = 0;
+        System.out.println("Enter array elements: ");
+        for (int i = 0; i < array.length; i++) {
+            array[i] = sc.nextInt();
+        }
+        int[] reverse = new int[array.length];
+        for (int k = 5; k >= 0 ; k--) {
+            reverse[k] = array[j];
+            j++;
+        }
+        System.out.println(Arrays.toString(reverse));*/
+// 2. ARRAY ROTATION BY 1 TO THE LEFT
+        int[] array = new int[5];
+    }
+}
